@@ -1,0 +1,131 @@
+package com.shivam.hotelmanagement.controller;
+
+import com.shivam.hotelmanagement.model.Room;
+import com.shivam.hotelmanagement.service.HotelService;
+
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+@SuppressWarnings("unused")
+public class RoomsController {
+    @FXML
+    private TableView<Room> roomTable;
+    @FXML
+    private TableColumn<Room, Integer> roomNoColumn;
+    @FXML
+    private TableColumn<Room, String> roomTypeColumn;
+    @FXML
+    private TableColumn<Room, Double> pricePerDayColumn;
+    @FXML
+    private TableColumn<Room, String> availabilityColumn;
+    @FXML
+    private TextField roomNoField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private ComboBox<String> roomTypeChoiceBox;
+    @FXML
+    private ComboBox<String> roomStatusFilter;
+    @FXML
+    private Button removeRoomButton;
+
+    private final HotelService service = new HotelService();
+    private Room selectedRoom;
+
+    @FXML
+    private void initialize() {
+        roomNoColumn.setCellValueFactory(new PropertyValueFactory<>("roomNo"));
+        roomTypeColumn.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        pricePerDayColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerDay"));
+        availabilityColumn.setCellValueFactory(new PropertyValueFactory<>("availabilityStatus"));
+        roomTypeChoiceBox.setItems(FXCollections.observableArrayList(service.listRoomTypes()));
+        roomTypeChoiceBox.setValue(service.listRoomTypes().get(0));
+        roomStatusFilter.setItems(FXCollections.observableArrayList(
+                "All Rooms",
+                Room.AVAILABLE_STATUS,
+            Room.BOOKED_STATUS));
+        roomStatusFilter.setValue("All Rooms");
+        roomStatusFilter.valueProperty().addListener((observable, oldValue, newValue) -> refreshRooms());
+        roomTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedRoom = newValue;
+            updateActionStates();
+        });
+        refreshRooms();
+        updateActionStates();
+    }
+
+    @FXML
+    private void addRoom() {
+        try {
+            int roomNo = Integer.parseInt(roomNoField.getText().trim());
+            double pricePerDay = Double.parseDouble(priceField.getText().trim());
+            service.addRoom(roomNo, roomTypeChoiceBox.getValue(), pricePerDay);
+            clearFields();
+            refreshRooms();
+        } catch (NumberFormatException exception) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Room number and price must be numeric.");
+        } catch (IllegalArgumentException exception) {
+            showAlert(Alert.AlertType.ERROR, "Cannot add room", exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void removeRoom() {
+        try {
+            if (selectedRoom == null) {
+                throw new IllegalArgumentException("Select an available room from the list first.");
+            }
+            int roomNo = selectedRoom.getRoomNo();
+            service.removeRoom(roomNo);
+            clearFields();
+            refreshRooms();
+        } catch (NumberFormatException exception) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Room number must be numeric.");
+        } catch (IllegalArgumentException exception) {
+            showAlert(Alert.AlertType.ERROR, "Cannot remove room", exception.getMessage());
+        }
+    }
+
+    @FXML
+    private void refreshRooms() {
+        var rooms = service.listRooms();
+        String selectedFilter = roomStatusFilter.getValue();
+        if (selectedFilter != null && !"All Rooms".equals(selectedFilter)) {
+            rooms = rooms.stream()
+                    .filter(room -> selectedFilter.equals(room.getAvailabilityStatus()))
+                    .toList();
+        }
+        roomTable.setItems(FXCollections.observableArrayList(rooms));
+        updateActionStates();
+    }
+
+    private void clearFields() {
+        roomTable.getSelectionModel().clearSelection();
+        selectedRoom = null;
+        roomNoField.clear();
+        priceField.clear();
+        roomTypeChoiceBox.setValue(service.listRoomTypes().get(0));
+        updateActionStates();
+    }
+
+    private void updateActionStates() {
+        if (removeRoomButton != null) {
+            removeRoomButton.setDisable(selectedRoom == null || !selectedRoom.getAvailable());
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}

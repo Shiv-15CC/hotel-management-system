@@ -1,0 +1,225 @@
+.root {
+    -fx-font-family: "Segoe UI Variable Text", "Aptos", "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #111418;
+    -fx-text-fill: #e7e9ec;
+}
+
+.header-bar {
+    -fx-background-color: #171b21;
+    -fx-border-color: #2a3139;
+    -fx-border-width: 0 0 1 0;
+}
+
+.nav-panel {
+    -fx-background-color: #171b21;
+    -fx-border-color: #2a3139;
+    -fx-border-width: 0 1 0 0;
+}
+
+.nav-heading {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #f0f2f4;
+}
+
+.app-title {
+    -fx-font-size: 21px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #f6f7f8;
+}
+
+.screen-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #f6f7f8;
+}
+
+.section-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #f0f2f4;
+}
+
+.label {
+    -fx-text-fill: #f0f2f4;
+}
+
+.helper-text {
+    -fx-text-fill: #a7b0b8;
+}
+
+.screen-header {
+    -fx-padding: 2 2 0 2;
+}
+
+.surface-panel {
+    -fx-background-color: #171b21;
+    -fx-border-color: #2a3139;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 14;
+}
+
+.action-bar {
+    -fx-padding: 2 0 0 0;
+}
+
+.button {
+    -fx-background-color: #232a33;
+    -fx-border-color: #3a4653;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 7 14;
+    -fx-text-fill: #f0f2f4;
+}
+
+.button:hover {
+    -fx-background-color: #2b333e;
+    -fx-border-color: #4a5767;
+}
+
+.button:pressed {
+    -fx-background-color: #1d232c;
+    -fx-border-color: #34404e;
+}
+
+.button:disabled {
+    -fx-opacity: 0.55;
+}
+
+.primary-button {
+    -fx-background-color: #4f7dff;
+    -fx-border-color: #4f7dff;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+}
+
+.primary-button:hover {
+    -fx-background-color: #6690ff;
+    -fx-border-color: #6690ff;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #3f66d6;
+    -fx-border-color: #3f66d6;
+}
+
+.text-field, .text-area {
+    -fx-background-color: #1f252d;
+    -fx-control-inner-background: #1f252d;
+    -fx-text-fill: #f0f2f4;
+    -fx-prompt-text-fill: #8d97a1;
+    -fx-background-radius: 6;
+    -fx-border-color: #2a3139;
+    -fx-border-radius: 6;
+}
+
+.combo-box {
+    -fx-background-color: #1f252d;
+    -fx-border-color: #2a3139;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #f0f2f4;
+    -fx-background-color: #1f252d;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #1f252d;
+    -fx-background-radius: 0 6 6 0;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #d7dbe0;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1f252d;
+    -fx-border-color: #2a3139;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #1f252d;
+    -fx-text-fill: #f0f2f4;
+}
+
+.combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: #2b333e;
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #3a4653;
+    -fx-text-fill: #f0f2f4;
+}
+
+.bill-summary {
+    -fx-background-color: #1f252d;
+    -fx-control-inner-background: #1f252d;
+    -fx-text-fill: #f0f2f4;
+    -fx-prompt-text-fill: #8d97a1;
+    -fx-highlight-fill: #3a4653;
+    -fx-highlight-text-fill: #f0f2f4;
+    -fx-border-color: #2a3139;
+}
+
+.icon-button {
+    -fx-background-color: #232a33;
+    -fx-border-color: #3a4653;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #f0f2f4;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-padding: 0 0;
+    -fx-min-width: 36;
+    -fx-min-height: 36;
+    -fx-pref-width: 36;
+    -fx-pref-height: 36;
+}
+
+.icon-button:hover {
+    -fx-background-color: #2b333e;
+    -fx-border-color: #4a5767;
+}
+
+.icon-button:pressed {
+    -fx-background-color: #1d232c;
+    -fx-border-color: #34404e;
+}
+
+.table-view {
+    -fx-background-color: #171b21;
+    -fx-table-cell-border-color: #2a3139;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #1f252d;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #1f252d;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #f0f2f4;
+    -fx-font-weight: 600;
+}
+
+.table-row-cell {
+    -fx-background-color: #171b21;
+    -fx-text-background-color: #f0f2f4;
+}
+
+.table-row-cell:filled:selected, .table-row-cell:filled:selected:hover {
+    -fx-background-color: #27303a;
+}
+
+.check-box {
+    -fx-text-fill: #f0f2f4;
+}
